@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nike | Run Swift 3</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #111;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s ease;
+      padding: 5px 10px;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: #aaa;
+    }
+
+    nav a.active::after,
+    nav a:hover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+    }
+
+    .hero {
+      background: url(nike-1-1024x699.jpg) no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      transition: transform 0.4s ease;
+    }
+
+    .hero h1:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    .products {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .products h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .card {
+      background-color: white;
+      width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 15px 0;
+    }
+
+    .card p {
+      padding: 0 15px 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 1000;
+    }
+
+    #popup h3 {
+      margin-bottom: 10px;
+    }
+
+    #popup p {
+      font-size: 14px;
+    }
+
+    #popup button {
+      margin-top: 15px;
+      padding: 8px 12px;
+      border: none;
+      background-color: #111;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    #popup button:hover {
+      background-color: #333;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 900;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nike</h1>
+  </header>
+
+  <nav>
+    <a href="project.html">Home</a>
+    <a href="mens.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="collaborations.html">Collaborations</a>
+    <a href="contact.html" target="blank">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Run Swift 3 - Elevate Your Run</h1>
+  </div>
+
+  <section class="products">
+    <h2>Featured Shoes</h2>
+    <div class="card-container">
+      <div class="card" onclick="showPopup('Run Swift 3', 'Lightweight comfort with breathable mesh and soft foam cushioning—perfect for everyday runners.')">
+        <img src="-original-imah4ekrcdndsh4j.jpeg.webp" alt="Run Swift 3">
+        <h3>Run Swift 3</h3>
+        <p>Click to learn more.</p>
+      </div>
+      <div class="card" onclick="showPopup('Pegasus 40', 'Reliable cushioning and a responsive ride for your daily miles. A classic redefined.')">
+        <img src="-473Wx593H-469434733-blackgrey-MODEL.jpg.avif" alt="Pegasus 40">
+        <h3>Pegasus 40</h3>
+        <p>Click to learn more.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="overlay"></div>
+
+  <div id="popup">
+    <h3 id="popupTitle"></h3>
+    <p id="popupText"></p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <section class="products">
+    <h2>Promotions</h2>
+    <div class="card-container">
+      <div class="card" onclick="showPopup('Nike Revolution 6', 'The Revolution 6 offers plush cushioning and a lightweight feel, perfect for both beginners and seasoned runners. Now 20% off this month!')">
+        <img src="nike-revolution-6-201-16360849-main.jpg.webp" alt="Nike Revolution 6">
+        <h3>Revolution 6</h3>
+        <p>Comfort-driven design, now at a discounted price.</p>
+      </div>
+      <div class="card" onclick="showPopup('Nike Downshifter 12', 'Built for speed and everyday training. Enjoy responsive support and secure lockdown fit—now on limited-time promotion!')">
+        <img src="NikeMensDownshifter12Running_DD9293-005.webp.jpeg" alt="Nike Downshifter 12">
+        <h3>Downshifter 12</h3>
+        <p>Versatile, sleek, and 15% off while supplies last.</p>
+      </div>
+      <div class="card" onclick="showPopup('Nike Air Zoom Winflo 10', 'Zoom Air units for springy comfort with durable rubber traction. Grab yours with 25% off in our spring promo!')">
+        <img src="images.jpeg" alt="Nike Winflo 10">
+        <h3>Air Zoom Winflo 10</h3>
+        <p>Spring-loaded speed, now at a sweet discount.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Nike, Inc. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Highlight active nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Popup functionality
+    function showPopup(title, text) {
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupText').textContent = text;
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
